@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch</title>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+        .Container {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+            background-color: white;
+            border: 2px solid white;
+        }
+        .SecondContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 700px;
+            height: 700px;
+            border-radius: 350px;
+            border: solid white 2px;
+            box-shadow: 5px 20px 20px grey;
+        }
+        .Needle {
+            position: absolute;
+            border-radius: 10px;
+            z-index: 1;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
+        }
+        #Minute {
+            width: 5px;
+            height: 350px;
+            background-color: black;
+           
+        }
+        #Hour {
+            width: 5px;
+            height: 250px;
+            background-color: red;
+            border: solid white 2px;
+        }
+        #Sec {
+            width: 5px;
+            height: 500px;
+            background-color: black;
+        }
+        .Dot {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            z-index: 2;
+            position: absolute;
+            border-radius: 30px;
+        }
+        img
+        {
+            height: 720px;
+            width: 720px;
+        }
+    </style>
+</head>
+<body>
+    <div class="Container">
+        <div  class="SecondContainer" >
+            <img src="bgWatch.png" alt="Can't Load">
+            <div id="Hour" class="Needle">^</div>
+            <div id="Minute" class="Needle">^</div>
+            <div id="Sec" class="Needle">^</div>
+            <div class="Dot"></div>
+        </div>
+    </div>
+</body>
+<script>
+    function updateTime() {
+        var date = new Date();
+        var hours = date.getUTCHours() + 6;
+        var minutes = date.getUTCMinutes() + 30;
+        var seconds = date.getUTCSeconds();
+
+        if(hours>12)
+        hours-=12;
+        var hourRotation = hours*30;
+        var minuteRotation = minutes * 6;
+        var secondRotation = seconds * 6;
+
+        document.getElementById("Hour").style.transform = "rotate(" + hourRotation + "deg)";
+        document.getElementById("Minute").style.transform = "rotate(" + minuteRotation + "deg)";
+        document.getElementById("Sec").style.transform = "rotate(" + secondRotation + "deg)";
+    }
+    updateTime();
+       setInterval(updateTime, 1000);
+</script>
+</html>
